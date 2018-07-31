@@ -1,7 +1,7 @@
 <template>
-    <div class="affiche">
-    <img :src="img"/> 
-    <h4>{{title}}</h4>
+    <div class="affiche" @click="selectMovie(movie)">
+    <img :src="getImgUrl()"/> 
+    <h4>{{ movie.title }}</h4>
     </div>
 </template>
 
@@ -9,9 +9,14 @@
 export default {
   name: 'Movie',
   props: {
-    title: String,
-    img: String
-  }
+    movie: Object,
+    selectMovie: Function
+  },
+  methods: {
+        getImgUrl () {
+            return `/imgs/${this.movie.url}`
+        }
+    }
 }
 </script>
 

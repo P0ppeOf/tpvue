@@ -3,55 +3,64 @@
     <Movie
     v-for="(movie, index) in movies" 
     :key="index"       
-    :title="movie.title" 
-    :img="getImgUrl(movie)"
+    :movie="movie"
+    :selectMovie="selectMovie"
     > 
     </Movie>
+<Movie :movie="movies[1]" ></Movie>
 
-<Movie :title="movies[0].title" :img="'/imgs/' + movies[0].url" />  <!-- Pour un film du tableau dans data, pas json -->
-
+<Popup
+v-if="selectedMovie"
+:movie="selectedMovie"
+:closeDetail="closeDetail"
+/>
 </div>
 </template>
 
 <script>
 import Movie from "./Movie.vue";
+import Popup from "./Popup.vue";
 
 export default {
   name: "MovieList",
   components: {
-    Movie
+    Movie,
+    Popup
   },
 
+  methods: {
+    selectMovie(movie) {
+      this.selectedMovie = movie;
+    },
+
+    closeDetail() {
+      this.selectedMovie = null;
+    }
+  },
 
   data() {
-      return {
-          movies: [] //on créé un tableau
-     /* movies: [
+    return {
+      selectedMovie: null,
+      movies: [] //on créé un tableau
+      /* movies: [
          Tableau de films
        { title: "Matrix", url: "matrix.jpg" },
         { title: "Dead Man", url: "dead.jpg" },
         { title: "Jurassic Park", url: "jpark.jpg" }
       ]*/
-    }
+    };
   },
-    async created() {
-        //fetch
-        
-        try {
-            let response = await fetch('movies.json')
-            this.movies = await response.json() //ici on rempli le tableau precedemment créé avec le json
 
-        } catch(error) {
-            console.log(error)
-        }
-    },
-    methods: {
-        getImgUrl (movie) {
-            return `/imgs/${movie.url}`
-        }
+  async created() {
+    //fetch
+
+    try {
+      let response = await fetch("movies.json");
+      this.movies = await response.json(); //ici on rempli le tableau precedemment créé avec le json
+    } catch (error) {
+      console.log(error);
     }
-
-
+  }
 };
 </script>
 
