@@ -1,14 +1,18 @@
 <template>
 <div class = "movieList">
     <Movie
-    v-for="(movie, index) in movies" :key="index" :movie="movie" :selectMovie="selectMovie">
+    v-for="(movie, index) in movies" 
+    :key="index" 
+    :movie="movie" 
+    @clickOnMovie="selectMovie">
     </Movie>
-<Movie :movie="movies[1]" :selectMovie="selectMovie" ></Movie>
+<Movie :movie="movies[1]" @clickOnMovie="selectMovie" ></Movie>
 
 <Popup
 v-if="selectedMovie"
 :movie="selectedMovie"
-:selectMovie="selectMovie"
+@closeOnClick="closeDetail"
+
 />
 </div>
 </template>

@@ -6,20 +6,24 @@
       <img :src="'/imgs/' + movie.url"/>
       <p>{{ movie.synopsys }}</p>
       </div>
-      <button type="button" @click="selectMovie(null)">Close</button>
+      <button type="button" @click="closePopup()">Close</button>
     </div>
 </div>
 </template>
 
 <script>
-
 export default {
-  name: 'Popup',
+  name: "Popup",
   props: {
     movie: Object,
     selectMovie: Function
+  },
+  methods: {
+    closePopup() {
+      this.$emit("closeOnClick");
+    }
   }
-}
+};
 </script>
 
 <style lang="less" >
@@ -31,49 +35,47 @@ export default {
   top: 0;
   left: 0;
 
-.popup {
-  width: 50vw;
-  margin-left: 25vw;
-  margin-top: 20vh;
-  position: center;
-  background: black;
-  color: white;
-  box-shadow: 0px 10px 8px black;
-  border-radius: 10px;
-  padding-top: 10px;
-}
+  .popup {
+    width: 50vw;
+    margin-left: 25vw;
+    margin-top: 20vh;
+    position: center;
+    background: black;
+    color: white;
+    box-shadow: 0px 10px 8px black;
+    border-radius: 10px;
+    padding-top: 10px;
+  }
 
-button {
-    background : #2b71d8;
-    width :50vw;
-    margin-top : 10px;
-    color :white;
+  button {
+    background: #2b71d8;
+    width: 50vw;
+    margin-top: 10px;
+    color: white;
     border-radius: 0px 0px 10px 10px;
-}
+  }
 
-.row
-{
-  display:flex;
-flex:row;
-}
+  .row {
+    display: flex;
+    flex: row;
+  }
 
-img {
+  img {
     width: 225px;
     height: 320px;
     border-radius: 10px;
     box-shadow: 0px 10px 8px black;
     transition: transform 0.5s, border 0.5s;
     box-sizing: border-box;
-    margin-left:20px;
-    margin-right:20px;
-   //float: left;
-}
-p {
-  margin-right: 20px;
- flex-wrap: wrap;
-}
-h4 {
-  margin-left:20px;
-}
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  p {
+    margin-right: 20px;
+    flex-wrap: wrap;
+  }
+  h4 {
+    margin-left: 20px;
+  }
 }
 </style>

@@ -9,12 +9,14 @@
 export default {
   name: 'Movie',
   props: {
-    movie: Object,
-    selectMovie: Function
+    movie: Object
   },
   methods: {
     getImgUrl () {
       return `/imgs/${this.movie.url}`
+    },
+    selectMovie () {
+      this.$emit('clickOnMovie', this.movie)
     }
   }
 }
