@@ -1,67 +1,61 @@
 <template>
 <div class = "movieList">
     <Movie
-    v-for="(movie, index) in movies" 
-    :key="index"       
-    :movie="movie"
-    :selectMovie="selectMovie"
-    > 
+    v-for="(movie, index) in movies" :key="index" :movie="movie" :selectMovie="selectMovie">
     </Movie>
-<Movie :movie="movies[1]" ></Movie>
+<Movie :movie="movies[1]" :selectMovie="selectMovie" ></Movie>
 
 <Popup
 v-if="selectedMovie"
 :movie="selectedMovie"
-:closeDetail="closeDetail"
+:selectMovie="selectMovie"
 />
 </div>
 </template>
 
 <script>
-import Movie from "./Movie.vue";
-import Popup from "./Popup.vue";
+import Movie from './Movie.vue'
+import Popup from './Popup.vue'
 
 export default {
-  name: "MovieList",
+  name: 'MovieList',
   components: {
     Movie,
     Popup
   },
 
   methods: {
-    selectMovie(movie) {
-      this.selectedMovie = movie;
+    selectMovie (movie) {
+      this.selectedMovie = movie
     },
 
-    closeDetail() {
-      this.selectedMovie = null;
+    closeDetail () {
+      this.selectedMovie = null
     }
   },
 
-  data() {
+  data () {
     return {
       selectedMovie: null,
-      movies: [] //on créé un tableau
+      movies: [] // on créé un tableau
       /* movies: [
          Tableau de films
        { title: "Matrix", url: "matrix.jpg" },
         { title: "Dead Man", url: "dead.jpg" },
         { title: "Jurassic Park", url: "jpark.jpg" }
-      ]*/
-    };
+      ] */
+    }
   },
 
-  async created() {
-    //fetch
-
+  async created () {
     try {
-      let response = await fetch("movies.json");
-      this.movies = await response.json(); //ici on rempli le tableau precedemment créé avec le json
+      let response = await fetch('movies.json')
+      this.movies = await response.json() // ici on rempli le tableau precedemment créé avec le json
     } catch (error) {
-      console.log(error);
+      console.log(error)
     }
   }
-};
+}
 </script>
 
 <style scoped>

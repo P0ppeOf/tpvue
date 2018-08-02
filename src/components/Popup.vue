@@ -2,9 +2,11 @@
 <div class="background">
     <div class="popup">
       <h4>{{ movie.title }}</h4>
-      <img :src= "movie.url">
+      <div class ="row">
+      <img :src="'/imgs/' + movie.url"/>
       <p>{{ movie.synopsys }}</p>
-      <button type="button" @click="closeDetail()">Close</button>
+      </div>
+      <button type="button" @click="selectMovie(null)">Close</button>
     </div>
 </div>
 </template>
@@ -12,12 +14,12 @@
 <script>
 
 export default {
-  name: "Popup",
+  name: 'Popup',
   props: {
-    movie : Object,
-    closeDetail: Function
+    movie: Object,
+    selectMovie: Function
   }
-};
+}
 </script>
 
 <style lang="less" >
@@ -38,6 +40,7 @@ export default {
   color: white;
   box-shadow: 0px 10px 8px black;
   border-radius: 10px;
+  padding-top: 10px;
 }
 
 button {
@@ -48,6 +51,12 @@ button {
     border-radius: 0px 0px 10px 10px;
 }
 
+.row
+{
+  display:flex;
+flex:row;
+}
+
 img {
     width: 225px;
     height: 320px;
@@ -55,7 +64,16 @@ img {
     box-shadow: 0px 10px 8px black;
     transition: transform 0.5s, border 0.5s;
     box-sizing: border-box;
-    margin-left : 20px;
+    margin-left:20px;
+    margin-right:20px;
+   //float: left;
+}
+p {
+  margin-right: 20px;
+ flex-wrap: wrap;
+}
+h4 {
+  margin-left:20px;
 }
 }
 </style>

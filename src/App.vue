@@ -7,16 +7,16 @@
 </template>
 
 <script>
-import Header from "./components/Header.vue";
-import MovieList from "./components/MovieList.vue";
+import Header from './components/Header.vue'
+import MovieList from './components/MovieList.vue'
 
 export default {
-  name: "app",
+  name: 'app',
   components: {
     Header,
-    MovieList,
+    MovieList
   }
-};
+}
 </script>
 
 <style lang="less">
