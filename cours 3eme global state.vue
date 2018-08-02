@@ -1,3 +1,51 @@
+ça y en a global state
+movie-state.js
+
+export const moviesState = {
+    movies: null,
+    selectedMovie: null
+}
+
+// movie.vue
+
+<template>
+    <div class="affiche" @click="selectMovie()">
+    <img :src="getImgUrl()"/>
+    <h4>{{ movie.title }}</h4>
+    </div>
+</template>
+
+<script>
+import { moviesState } from "../states/movies-state";
+
+export default {
+  name: "Movie",
+  props: {
+    movie: Object
+  },
+  data() {
+    return {
+      moviesState
+    }
+  },
+
+  methods: {
+    getImgUrl() {
+      return `/imgs/${this.movie.url}`;
+    },
+    /* selectMovie () {
+      this.$emit('clickOnMovie', this.movie)
+    } */
+    selectMovie() {
+      this.moviesState.selectedMovie = this.movie
+    }
+  }
+};
+</script>
+
+
+// movie list.vue
+
 <template>
 <div class = "movieList">
     <Movie
@@ -56,29 +104,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-div.movieList {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-  flex-wrap: wrap;
-  overflow: scroll;
-  flex-grow: 1;
-  margin-left: 30px;
-  margin-right: 30px;
-}
-
-@media screen and (max-width: 1120px) {
-  div.movieList {
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-}
-@media screen and (max-width: 520px) {
-  div.movieList {
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-}
-</style>

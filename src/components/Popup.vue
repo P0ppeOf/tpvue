@@ -1,10 +1,10 @@
 <template>
-<div class="background">
+<div class="background" >
     <div class="popup">
-      <h4>{{ movie.title }}</h4>
+      <h4>{{ moviesState.selectedMovie.title }}</h4>
       <div class ="row">
-      <img :src="'/imgs/' + movie.url"/>
-      <p>{{ movie.synopsys }}</p>
+      <img :src="'/imgs/' + moviesState.selectedMovie.url"/>
+      <p>{{ moviesState.selectedMovie.synopsys }}</p>
       </div>
       <button type="button" @click="closePopup()">Close</button>
     </div>
@@ -12,17 +12,36 @@
 </template>
 
 <script>
+import { moviesState } from "../states/movies-state";
+
 export default {
   name: "Popup",
-  props: {
-    movie: Object,
-    selectMovie: Function
+  
+  data() {
+    return {
+      moviesState
+    }
   },
+ 
+ created () {
+      document.addEventListener('keydown', this.escapeKeyListener)
+    },
+  
+    beforeDestroy () {
+      document.removeEventListener('keydown', this.escapeKeyListener)
+    },
+
   methods: {
     closePopup() {
-      this.$emit("closeOnClick");
+      this.moviesState.selectedMovie = null
+    },
+
+  escapeKeyListener (event) {
+    if (event.keyCode === 27) {
+      this.closePopup()
     }
   }
+}
 };
 </script>
 
@@ -50,7 +69,7 @@ export default {
   button {
     background: #2b71d8;
     width: 50vw;
-    margin-top: 10px;
+    margin-top: 20px;
     color: white;
     border-radius: 0px 0px 10px 10px;
   }
@@ -75,6 +94,7 @@ export default {
     flex-wrap: wrap;
   }
   h4 {
+    font-size: 20px;
     margin-left: 20px;
   }
 }
