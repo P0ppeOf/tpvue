@@ -1,5 +1,5 @@
 <template>
-<div class="background" >
+<div class="background" @click="backClick($event)" >
     <div class="popup">
       <h4>{{ moviesState.selectedMovie.title }}</h4>
       <div class ="row">
@@ -22,7 +22,7 @@ export default {
       moviesState
     }
   },
- 
+
  created () {
       document.addEventListener('keydown', this.escapeKeyListener)
     },
@@ -32,12 +32,21 @@ export default {
     },
 
   methods: {
+     backClick(event)
+ {
+   console.log(event)
+
+    if (event.target.className === "background" )
+    {
+      this.closePopup()
+    } 
+ },
     closePopup() {
       this.moviesState.selectedMovie = null
     },
 
   escapeKeyListener (event) {
-    if (event.keyCode === 27) {
+    if (event.key == 'Escape') {
       this.closePopup()
     }
   }

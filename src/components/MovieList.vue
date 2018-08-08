@@ -1,5 +1,6 @@
 <template>
 <div class = "movieList">
+  
     <Movie
     v-for="(movie, index) in moviesState.movies" 
     :key="index" 
@@ -11,19 +12,24 @@
 <Popup
 v-if="moviesState.selectedMovie"
 />
+  <Loader
+  v-if="validPop.value"
+  />
 </div>
 </template>
 
 <script>
 import Movie from './Movie.vue'
 import Popup from './Popup.vue'
+import Loader from './Loader.vue'
 import { moviesState } from '../states/movies-state'
 
 export default {
   name: 'MovieList',
   components: {
     Movie,
-    Popup
+    Popup,
+    Loader
   },
 
 /* on supprime les methodes parce que les var glob sont dans le state global
@@ -39,7 +45,10 @@ export default {
 
   data () {
     return {
-      moviesState 
+      moviesState,
+      validPop: {
+        value : false
+      } 
       //1 on imorte le fichier pour init, ça remplace en dessous
       /* selectedMovie: null,
       movies: [] */
@@ -48,8 +57,10 @@ export default {
 
   async created () {
     try {
-      let response = await fetch('movies.json')
+      this.validPop.value = true
+      let response = await fetch("http://localhost:5000/Movies")
       this.moviesState.movies = await response.json() // ici on rempli le tableau precedemment créé avec le json
+      this.validPop.value = false
  } catch (error) {
       console.log(error)
     }

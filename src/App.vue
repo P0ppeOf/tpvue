@@ -1,20 +1,23 @@
 <template>
   <div id="app">
-    <Header/>
+    <Header/>  
     <MovieList>
     </MovieList>
+  
   </div>
 </template>
 
 <script>
 import Header from './components/Header.vue'
 import MovieList from './components/MovieList.vue'
+//import Loader from './components/Loader.vue'
 
 export default {
   name: 'app',
   components: {
     Header,
     MovieList
+   // Loader
   }
 }
 </script>

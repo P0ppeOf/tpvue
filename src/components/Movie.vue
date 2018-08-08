@@ -1,21 +1,31 @@
 <template>
-    <div class="affiche" @click="selectMovie()">
-    <img :src="getImgUrl()"/>
+    <div class="affiche" >
+    <img :src="getImgUrl()" @click="selectMovie()"/>
+    <LoaderMovie
+  v-if="validPop.value"
+  />
     <h4>{{ movie.title }}</h4>
     </div>
 </template>
 
 <script>
 import { moviesState } from "../states/movies-state";
+import LoaderMovie from './LoaderMovie.vue'
 
 export default {
   name: "Movie",
+  components: {
+    LoaderMovie
+  },
   props: {
     movie: Object
   },
   data() {
     return {
-      moviesState
+      moviesState,
+       validPop: {
+        value : false
+      } 
     }
   },
 
@@ -23,12 +33,22 @@ export default {
     getImgUrl() {
       return `/imgs/${this.movie.url}`;
     },
+
     /* selectMovie () {
       this.$emit('clickOnMovie', this.movie)
     } */
-    selectMovie() {
-      this.moviesState.selectedMovie = this.movie
+
+     async selectMovie() {
+      try {
+        this.validPop.value = true
+     let ligneTab = await fetch("http://localhost:5000/Movies/" + this.movie.id)
+      const mov = await ligneTab.json() 
+      this.moviesState.selectedMovie = mov
+      this.validPop.value = false
+    } catch(error) {
+      console.log("error")
     }
+  } 
   }
 };
 </script>
@@ -36,12 +56,13 @@ export default {
 <style lang="less" scoped>
 div.affiche {
   width: 225px;
+  height: 400px;
   color: white;
   text-align: center;
   margin-top: 30px;
   margin-left: 30px;
   margin-right: 30px;
-
+  position: relative;
   img {
     width: 225px;
     height: 320px;
