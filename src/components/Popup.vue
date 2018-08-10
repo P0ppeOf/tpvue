@@ -46,7 +46,7 @@ export default {
     },
 
   escapeKeyListener (event) {
-    if (event.key == 'Escape') {
+    if (event.key === 'Escape') {
       this.closePopup()
     }
   }
@@ -55,13 +55,21 @@ export default {
 </script>
 
 <style lang="less" >
-.background {
-  position: fixed;
+
+
+.background { 
+
+  //position: fixed;
   background-color: rgba(255, 255, 255, 0.6);
-  height: 100vh;
+
   width: 100vw;
-  top: 0;
-  left: 0;
+  position: absolute;
+  top: 0px;
+  left: 100vw;
+  bottom: 0px;
+/*   top: 0px;
+  left: 0px; */
+
 
   .popup {
     width: 50vw;
@@ -73,7 +81,10 @@ export default {
     box-shadow: 0px 10px 8px black;
     border-radius: 10px;
     padding-top: 10px;
+   
+
   }
+
 
   button {
     background: #2b71d8;
