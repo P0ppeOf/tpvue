@@ -25,10 +25,12 @@ export default {
 
  created () {
       document.addEventListener('keydown', this.escapeKeyListener)
+      moviesState.bouton.value = false;
     },
   
     beforeDestroy () {
       document.removeEventListener('keydown', this.escapeKeyListener)
+      moviesState.bouton.value = true;
     },
 
   methods: {

@@ -3,7 +3,9 @@
         <h1>
             Movies
         </h1>
+
     </div>
+    
 </template>
 
 <script>
@@ -24,6 +26,8 @@ export default {
   border: 5px solid;
   border-color: black;
   box-shadow: 0px 20px 15px black;
+ z-index: 1;
+
 
   h1 {
     color: black;

@@ -4,7 +4,7 @@
     <LoaderMovie
   v-if="validPop.value"
   />
-    <h4>{{ movie.title }}</h4>
+    <h4 @click="selectMovie()" >{{ movie.title }}</h4>
     </div>
 </template>
 
@@ -26,7 +26,7 @@ export default {
        validPop: {
         value : false
       } 
-    }
+    } 
   },
 
   methods: {

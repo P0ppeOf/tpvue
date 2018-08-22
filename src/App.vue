@@ -1,20 +1,22 @@
 <template>
   <div id="app">
     <Header/>  
-    <div class = "swipContent">
-  <div class = "swip" :class="{ bouge: moviesState.selectedMovie }">
-    <MovieList>
-    </MovieList>
-    <Popup v-if="moviesState.selectedMovie"/>
-     </div>
-  </div>
+<!--   <button>+</button> -->
+ 
+    <router-link to="/Formulaire">
+  <button class="plusBout" v-if="moviesState.bouton.value">+</button>
+</router-link>
+    <router-view>
+<!--  <MovieListPage/>  -->
+    </router-view>
   </div>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
-import MovieList from "./components/MovieList.vue";
-import Popup from "./components/Popup.vue";
+//import MovieList from "./components/MovieList.vue";
+//import MovieListPage from "./components/MovieListPage.vue";
+//import Popup from "./components/Popup.vue";
 import { moviesState } from "./states/movies-state";
 
 //import Loader from './components/Loader.vue'
@@ -23,9 +25,9 @@ export default {
   name: "app",
   components: {
     Header,
-    Popup,
-    MovieList
-    // Loader
+   // Popup,
+   // MovieList,
+   //MovieListPage
   },
 
   data() {
@@ -47,24 +49,19 @@ export default {
   flex-direction: column;
 }
 
-.swipContent {
-  position: relative;
-  width: 100vw;
-  display: flex;
-  flex-grow: 1;
-  overflow: hidden;
-  .swip {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    bottom: 0px;
-    width: 200vw;
-    display: flex;
-    flex-direction: row;
-    transition: transform 1s;
-    &.bouge {
-      transform: translate(-100vw);
-    }
-  }
+button.plusBout {
+  height : 100px;
+  width : 100px;
+  top:80%;
+  right:10%;
+  position:absolute;
+  z-index: 9999;
+  border-radius: 100px;
+  background-color: #2b71d8 ;
+  color: white;
+  font-size: 300%;
+  font-weight: bold;
+  border:0px;
+  box-shadow: 4px 4px 4px black;
 }
 </style>
