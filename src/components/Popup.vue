@@ -3,7 +3,7 @@
     <div class="popup">
       <h4>{{ moviesState.selectedMovie.title }}</h4>
       <div class ="row">
-      <img :src="'/imgs/' + moviesState.selectedMovie.url"/>
+      <img :src="moviesState.selectedMovie.url"/>
       <p>{{ moviesState.selectedMovie.synopsys }}</p>
       </div>
       <button type="button" @click="closePopup()">Close</button>

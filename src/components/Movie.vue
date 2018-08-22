@@ -1,6 +1,6 @@
 <template>
     <div class="affiche" >
-    <img :src="getImgUrl()" @click="selectMovie()"/>
+    <img :src="movie.url" @click="selectMovie()"/>
     <LoaderMovie
   v-if="validPop.value"
   />
@@ -30,9 +30,6 @@ export default {
   },
 
   methods: {
-    getImgUrl() {
-      return `/imgs/${this.movie.url}`;
-    },
 
     /* selectMovie () {
       this.$emit('clickOnMovie', this.movie)
